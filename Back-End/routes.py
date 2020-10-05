@@ -13,16 +13,21 @@ def listar_pacientes():
     lista_pac = []
     for p in pacientes:
         lista_pac.append(p.json())
-        print(lista_pac)
+    print(lista_pac)
     return jsonify(lista_pac)
 
-@app.route("/add_paciente")
+@app.route("/incluir_paciente", methods=['post'])
 def adicionar_paciente():
+    resposta = jsonify({"resultado": "ok", "detalhes": "ok"})
     dados = request.get_json()
-    novo_paci = Paciente(**dados)
-    db.session.add(novo_paci)
-    db.session.commit()
-    return {"Funcionou":True}
+    try:
+        novo_paci = Paciente(**dados)
+        db.session.add(novo_paci)
+        db.session.commit()
+    except Exception as e:
+        resposta = jsonify({"resultado":"erro", "detalhes":str(e)})
+    resposta.headers.add("Access-Control-Allow-Origin", "*")
+    return resposta
     
 
 

@@ -23,16 +23,17 @@
                 <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-item nav-link" href="#" id="linkListarPessoas">Listar</a>
+                    <a class="nav-item nav-link" href="#" id="linkListarPacientes">Listar</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-item nav-link" data-toggle="modal" data-target="#modalIncluirPaciente" href="#">Incluir</a>
                 </li>
             </ul>
-            <form class="form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-            </form>
             </div>
         </nav>
     </header>
+
+
     <main role="main" class="container ml-9 p-0 principal1">
         <div id="inicio">
             <h1 id="inicio"><center>Cadastro de Pacientes</center></h1>
@@ -43,12 +44,79 @@
                     <th>Nome</th>
                     <th>Telefone</th>
                     <th>Data Nascimento</th>
-                    <th>Profissão</th>
+                    <th>Peso</th>
+                    <th>Altura</th>
                 </tr>
             </thead>
             <tbody id="btabela"></tbody>
         </table>
+
+
+
+
+
+
+    <div class="modal fade" id="modalIncluirPaciente" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content" style="border-color: rgb(68, 255, 114);">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Cadastro de Pacientes</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+
+                        <div class="form-group">
+                            <label for="campoNome">Nome</label>
+                            <input type="text" class="form-control" id="campoNome"
+                                aria-describedby="nomeHelp" placeholder="Nome">
+                            <small id="nomeHelp" class="form-text text-muted">Informe o seu nome completo </small>
+                        </div>
+                        <div class="form-group">
+                            <label for="campoTelefone">Telefone</label>
+                            <input type="text" class="form-control" id="campoTelefone"
+                                aria-describedby="telefoneHelp" placeholder="Telefone">
+                            <small id="telefoneHelp" class="form-text text-muted">Informe com DDD.</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="campoDatanasc">Data de Nascimento</label>
+                            <input type="date" class="form-control" id="campoDatanasc"
+                                aria-describedby="datanascHelp" placeholder="Data de Nascimento">
+                            <small id="datanascHelp" class="form-text text-muted">Informe sua data de nascimento</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="campoPeso">Peso</label>
+                            <input type="text" class="form-control" id="campoPeso"
+                                aria-describedby="pesoHelp" placeholder="Peso">
+                            <small id="pesoHelp" class="form-text text-muted">Informe seu peso em Kg</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="campoAltura">Altura</label>
+                            <input type="text" class="form-control" id="campoAltura"
+                                aria-describedby="alturaHelp" placeholder="Altura">
+                            <small id="alturaHelp" class="form-text text-muted">Informe sua altura em M</small>
+                        </div>
+
+                    </form>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Cancelar</button>
+                    <button id="btIncluirPaciente" type="button" class="btn btn-outline-success">Incluir</button>
+                </div>
+            </div>
+        </div>
+    </div>
     </main>
+
+
+
+
+
+
+
 
 
     <!-- Optional JavaScript -->
