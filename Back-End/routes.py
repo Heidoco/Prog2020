@@ -28,8 +28,17 @@ def adicionar_paciente():
         resposta = jsonify({"resultado":"erro", "detalhes":str(e)})
     resposta.headers.add("Access-Control-Allow-Origin", "*")
     return resposta
-    
 
+@app.route("/remover_paciente/<int:paciente_id>", methods=['DELETE'])
+def remover_paciente(paciente_id):
+    resposta = jsonify({"resultado": "ok", "detalhes": "ok"})
+    try:
+        Paciente.query.filter(Paciente.id == paciente_id).delete()
+        db.session.commit()
+    except Exception as e:
+        resposta = jsonify({"resultado":"erro", "detalhes":str(e)})
+    resposta.headers.add("Access-Control-Allow-Origin", "*")
+    return resposta
 
 if __name__ == "__main__":
     app.run(debug=True)

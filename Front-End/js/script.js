@@ -15,12 +15,14 @@ $(function() { // quando o documento estiver pronto/carregado
             $('#btabela').empty();
             // percorrer a lista de pessoas retornadas; 
             for (var i in lista_pac) { //i vale a posição no vetor
-                lin = '<tr>' + // elabora linha com os dados da pessoa
+                lin = '<tr id="linha_'+ lista_pac[i].id+'">' + // elabora linha com os dados da pessoa
                 '<td>' + lista_pac[i].nome + '</td>' + 
                 '<td>' + lista_pac[i].telefone + '</td>' + 
                 '<td>' + lista_pac[i].data_nasc + '</td>'+
                 '<td>' + lista_pac[i].peso + '</td>' +
                 '<td>' + lista_pac[i].altura + '</td>' + 
+                '<td><a href=# id="excluir_' + lista_pac[i].id + '" ' + 'class="excluir_paciente"> <p> Remover </p> </a>' + 
+                '</td>' + 
                 '</tr>';
                 // adiciona a linha no corpo da tabela
                 $('#btabela').append(lin);
@@ -74,7 +76,39 @@ $(function() { // quando o documento estiver pronto/carregado
         }
     });
 
+    $(document).on("click", ".excluir_paciente", function() {
+        // obter o ID do ícone que foi clicado
+        var componente_clicado = $(this).attr('id'); 
+        // no id do ícone, obter o ID
+        var nome_icone = "excluir_";
+        var id_paciente = componente_clicado.substring(nome_icone.length);
+        // solicitar a exclusão
+        $.ajax({
+            url: 'http://localhost:5000/remover_paciente/'+id_paciente,
+            type: 'DELETE', // método da requisição
+            dataType: 'json', // os dados são recebidos no formato json
+            success: PExcluido, // chama a função listar para processar o resultado
+            error: erroAoExcluir
+        });
+
+        function PExcluido (retorno) {
+            if (retorno.resultado == "ok") { // a operação deu certo?
+                // remover da tela a linha cuja pessoa foi excluída
+                $("#linha_" + id_paciente).hide(function(){
+                    // informar resultado de sucesso
+                    alert("Sucesso!");
+                });
+            } else {
+                // informar mensagem de erro
+                alert(retorno.resultado + ":" + retorno.detalhes);
+            }            
+        }
+
+        function erroAoExcluir (retorno) {
+            // informar mensagem de erro
+            alert("erro ao excluir dados, verifique o backend: ");
+        }
+    });
+
+
 });
-
-
-
