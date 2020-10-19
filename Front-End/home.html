@@ -36,10 +36,36 @@
     </header>
 
 
-    <main role="main" class="container ml-9 p-0 principal1">
+    
+    <div class="container text-center">
+        <h1 class="display-3 title">Sistema de Cadastro de Pacientes</h1>
+        <hr class="border-info"><br><br>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="card text-center border-info" >
+                    <div class="card-body">
+                        <h5 class="card-title">Adicionar um novo paciente na lista</h5>
+                        <hr class="border-info">
+                        <a class="btn btn-primary" data-toggle="modal" data-target="#modalIncluirPaciente" href="#">Cadastrar</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="card text-center border-info">
+                    <div class="card-body">
+                        <h5 class="card-title">Listar os Pacientes já cadastrados</h5>
+                        <hr class="border-info">
+                        <a href="#" id="linkListarPacientes" class="btn btn-primary">Listar</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <br><br>
         <div id="inicio">
             <h1 id="inicio" class="display-3"><center>Lista de Pacientes</center></h1>
         </div>
+        <hr class="border-info">
         <table class="table table-hover table-striped">
             <thead class="thead bg-info">
                 <tr>
@@ -53,9 +79,7 @@
             </thead>
             <tbody id="btabela" class="center" style="border: 1px solid rgb(0, 174, 255)" ></tbody>
         </table>
-
-
-
+    </div>
 
 
 
