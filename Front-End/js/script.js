@@ -21,7 +21,7 @@ $(function() { // quando o documento estiver pronto/carregado
                 '<td>' + lista_pac[i].data_nasc + '</td>'+
                 '<td>' + lista_pac[i].peso + '</td>' +
                 '<td>' + lista_pac[i].altura + '</td>' + 
-                '<td><a href=# id="excluir_' + lista_pac[i].id + '" ' + 'class="excluir_paciente"> <p> Remover </p> </a>' + 
+                '<td><a href=# id="excluir_' + lista_pac[i].id + '" ' + 'class="excluir_paciente"><div class="btn btn-sm btn-outline-danger">Remover</div></a>' + 
                 '</td>' + 
                 '</tr>';
                 // adiciona a linha no corpo da tabela
@@ -94,7 +94,7 @@ $(function() { // quando o documento estiver pronto/carregado
         function PExcluido (retorno) {
             if (retorno.resultado == "ok") { // a operação deu certo?
                 // remover da tela a linha cuja pessoa foi excluída
-                $("#linha_" + id_paciente).hide(function(){
+                $("#linha_" + id_paciente).fadeOut(10, function(){
                     // informar resultado de sucesso
                     alert("Sucesso!");
                 });
