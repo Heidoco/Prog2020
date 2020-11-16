@@ -68,8 +68,8 @@ class Consulta(db.Model):
 
 #Criar
 if __name__ == "__main__":
-    db.create_all()
-
+    #db.create_all()
+    """
     # Teste de Adição
     #Criar Paciente
     nova = Paciente(nome = "Alan", data_nasc = "12132000", 
@@ -89,6 +89,8 @@ if __name__ == "__main__":
     db.session.commit()
     print(consulta)   
 
+    """
+
     todas = db.session.query(Paciente).all()
     print(todas)
     for p in todas: 
@@ -98,3 +100,8 @@ if __name__ == "__main__":
     print(todos)
     for i in todos: 
         print(i.json())
+
+    cons = db.session.query(Consulta).all()
+    print(cons)
+    for c in cons: 
+        print(c.json())
