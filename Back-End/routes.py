@@ -1,5 +1,5 @@
 from config import *
-from models import Paciente
+from models import *
 
 @app.route("/")
 def mostrar_home():
@@ -40,5 +40,28 @@ def remover_paciente(paciente_id):
     resposta.headers.add("Access-Control-Allow-Origin", "*")
     return resposta
 
+@app.route("/listar_consultas")
+def listar_consultas():
+    # obter exames realizados
+    consultas = db.session.query(Consulta).all()
+    # converter dados para json
+    lista_jsons = [ x.json() for x in consultas ]
+    # converter a lista do python para json
+    resposta = jsonify(lista_jsons)
+    # PERMITIR resposta para outras pedidos oriundos de outras tecnologias
+    resposta.headers.add("Access-Control-Allow-Origin", "*")
+    return resposta
+
+@app.route("/listar_medicos")
+def listar_medicos():
+    # obter exames realizados
+    medicos = db.session.query(Medico).all()
+    # converter dados para json
+    lista_jsons = [ x.json() for x in medicos ]
+    # converter a lista do python para json
+    resposta = jsonify(lista_jsons)
+    # PERMITIR resposta para outras pedidos oriundos de outras tecnologias
+    resposta.headers.add("Access-Control-Allow-Origin", "*")
+    return resposta
 if __name__ == "__main__":
     app.run(debug=True)
