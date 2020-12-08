@@ -63,5 +63,19 @@ def listar_medicos():
     # PERMITIR resposta para outras pedidos oriundos de outras tecnologias
     resposta.headers.add("Access-Control-Allow-Origin", "*")
     return resposta
+
+@app.route("/incluir_consulta", methods=['post'])
+def incluir_consulta():
+    resposta = jsonify({"resultado": "ok", "detalhes": "ok"})
+    dados = request.get_json()
+    try:
+        nova = Consulta(**dados)
+        db.session.add(nova)
+        db.session.commit()
+    except Exception as e: 
+        resposta = jsonify({"resultado":"erro", "detalhes":str(e)})
+    resposta.headers.add("Access-Control-Allow-Origin", "*")
+    return resposta
+
 if __name__ == "__main__":
     app.run(debug=True)

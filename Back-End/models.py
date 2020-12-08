@@ -79,7 +79,7 @@ if __name__ == "__main__":
     print(nova.nome)
     #Criar Médico
     Hanz = Medico(nome = "Dr. Hanz", especi = "Clinico Geral", crm="11112222" )
-    db.session.add(Hanz)      
+    db.session.add(Hanz)
     db.session.commit()
     print(Hanz.nome)    
     
@@ -88,9 +88,13 @@ if __name__ == "__main__":
     db.session.add(consulta)      
     db.session.commit()
     print(consulta)   
-
+    medico_novo = Medico(nome = "Dr. jooj", especi = "Cardiologista", crm="111323232" )
+    db.session.add(medico_novo)
+    db.session.commit()
+    medico_novo = Medico(nome = "Dr. cleiton", especi = "Neurologista", crm="3123123" )
+    db.session.add(medico_novo)
+    db.session.commit()
     """
-
     todas = db.session.query(Paciente).all()
     print(todas)
     for p in todas: 

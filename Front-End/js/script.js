@@ -111,4 +111,100 @@ $(function() { // quando o documento estiver pronto/carregado
     });
 
 
+    function carregarCombo(combo_id, nome_classe) {
+        $.ajax({
+            url: 'http://localhost:5000/listar_'+nome_classe,
+            method: 'GET',
+            dataType: 'json', // os dados são recebidos no formato json
+            success: carregar, // chama a função listar para processar o resultado
+            error: function(problema) {
+                alert("erro ao ler dados, verifique o backend: ");
+            }
+        });
+        function carregar (dados) {
+            // esvaziar o combo
+            $('#'+combo_id).empty();
+            // mostra ícone carregando...
+            $('#loading_'+combo_id).removeClass('d-none');
+            // percorrer a lista de dados
+            for (var i in dados) { //i vale a posição no vetor
+                $('#'+combo_id).append(
+                    $('<option></option>').attr("value", 
+                        dados[i].id).text(dados[i].nome));
+            }
+        }
+    }
+
+    $('#modalIncluirConsulta').on('shown.bs.modal', function (e) {
+        // carregar as listas de pessoas e exames
+        carregarCombo("campoPacienteId", "pacientes");
+        carregarCombo("campoMedicoId", "medicos");
+    })
+
+    // incluir consulta
+    $(document).on("click", "#btIncluirConsulta", function() {
+        //pegar dados da tela
+        data = $("#campoDataCons").val();
+        paciente_id = $("#campoPacienteId").val();
+        medico_id = $("#campoMedicoId").val();
+        // preparar dados no formato json
+        var dados = JSON.stringify({ data: data, paciente_id: paciente_id, medico_id: medico_id });
+        // fazer requisição para o back-end
+        $.ajax({
+            url: 'http://localhost:5000/incluir_consulta',
+            type: 'POST',
+            dataType: 'json',
+            contentType: 'application/json', // tipo dos dados enviados
+            data: dados, // estes são os dados enviados
+            success: dadosIncluidos, // chama a função listar para processar o resultado
+            error: erroAoIncluir
+        });
+        function dadosIncluidos (retorno) {
+            if (retorno.resultado == "ok") { // a operação deu certo?
+                // informar resultado de sucesso
+                alert("Dados incluídos com sucesso!");
+                // limpar os campos
+                $("#campoData").val("");
+                $("#campoPessoaId").val("");
+                $("#campoExameId").val("");
+            } else {
+                // informar mensagem de erro
+                alert(retorno.resultado + ":" + retorno.detalhes);
+            }            
+        }
+        function erroAoIncluir (retorno) {
+            // informar mensagem de erro
+            alert("erro ao incluir dados, verifique o backend: ");
+        }
+    });
+    
+    function listar_consultas() {
+        $.ajax({
+            url: 'http://localhost:5000/listar_consultas',
+            method: 'GET',
+            dataType: 'json', // os dados são recebidos no formato json
+            success: listar, // chama a função listar para processar o resultado
+            error: function(problema) {
+                alert("erro ao ler dados, verifique o backend: ");
+            }
+        });
+        function listar (consultas) {
+            $('#contabela').empty();     
+            // percorrer a lista de exanes realizados retornados; 
+            for (var i in consultas) { //i vale a posição no vetor
+                lin = '<tr id="linha_consulta_'+consultas[i].id+'">' + 
+                '<td>' + consultas[i].data + '</td>' + 
+                // dados da pessoa
+                '<td>' + consultas[i].paciente.nome + '</td>' + 
+                // dados do exame
+                '<td>' + consultas[i].medico.nome + '</td>' + 
+                '</tr>';
+                // adiciona a linha no corpo da tabela
+                $('#contabela').append(lin);
+            }
+        }
+    }
+    $(document).on("click", "#linkListarConsultas", function() {
+        listar_consultas();
+    });
 });

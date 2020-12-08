@@ -30,6 +30,9 @@
                 <li class="nav-item active">
                     <a class="nav-item nav-link" data-toggle="modal" data-target="#modalIncluirPaciente" href="#">Incluir</a>
                 </li>
+                <li class="nav-item active">
+                    <a class="nav-item nav-link" data-toggle="modal" data-target="#modalIncluirConsulta" href="#">Marcar Consulta</a>
+                </li>
             </ul>
             </div>
         </nav>
@@ -133,6 +136,50 @@
                     <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Cancelar</button>
                     <button id="btIncluirPaciente" type="button" class="btn btn-outline-info">Incluir</button>
                 </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="modal fade" id="modalIncluirConsulta" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content" style="border-color:rgb(0, 174, 255)">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Marcar Consulta</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <label for="campoPacienteId">Nome Paciente</label>
+                            <select class="form-control" id="campoPacienteId" aria-describedby="pacienteIdHelp" placeholder="Nome do Paciente">
+                            </select> 
+                            <small id="pacienteIdHelp" class="form-text text-muted">Informe o nome do paciente</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="campoMedicoId">Nome Médico</label>
+                            <select class="form-control" id="campoMedicoId" aria-describedby="medicoIdHelp" placeholder="Nome do Médico">
+                            </select> 
+                            <small id="medicoIdHelp" class="form-text text-muted">Informe o nome do Médico</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="campoDataCons">Data da Consulta</label>
+                            <input type="datetime-local" class="form-control" id="campoDataCons"
+                                aria-describedby="datanascHelp" placeholder="Data da Consulta">
+                            <small id="datanascHelp" class="form-text text-muted">Informe a data da consulta</small>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Cancelar</button>
+                    <button id="btIncluirConsulta" type="button" class="btn btn-outline-info">Incluir</button>
+                </div>
+
             </div>
         </div>
     </div>
